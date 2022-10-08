@@ -1,13 +1,14 @@
-var express = require('express')
-var app = express()
+var request = require("request");
+var options = { 
+  method: 'GET',
+  url: 'https://api.sinric.pro/api/v1/activitylogs/device/63304fab36b44d06d4c4ff0d',
+  headers: 
+  {   'Authorization': 'Bearer <TOKEN HERE>',
+      'Content-Type': 'application/x-www-form-urlencoded' 
+  }
+};
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
-
-app.get('/', function(request, response) {
-  response.send('Hello World!')
-})
-
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+  console.log(body);
+});
